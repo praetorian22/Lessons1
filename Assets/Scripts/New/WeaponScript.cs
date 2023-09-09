@@ -4,23 +4,23 @@ using UnityEngine;
 
 public class WeaponScript : MonoBehaviour
 {
-    [SerializeField] private float timeReload;
-    [SerializeField] private GameObject shotPrefab;
-    [SerializeField] private Transform pointShotPosition;
+    [SerializeField] private float _timeReload;
+    [SerializeField] private GameObject _shotPrefab;
+    [SerializeField] private Transform _pointShotPosition;
 
-    private float ttimeReload;
+    private float _ttimeReload;
 
     private void Start()
     {
-        ttimeReload = 0;
+        _ttimeReload = 0;
     }
 
     public GameObject Shot()
     {
-        if (ttimeReload <= 0)
+        if (_ttimeReload <= 0)
         {
-            GameObject shot = Instantiate(shotPrefab, pointShotPosition.position, Quaternion.identity, gameObject.transform.parent);
-            ttimeReload = timeReload;
+            GameObject shot = Instantiate(_shotPrefab, _pointShotPosition.position, Quaternion.identity, gameObject.transform.parent);
+            _ttimeReload = _timeReload;
             return shot;            
         }
         return null;
@@ -28,6 +28,6 @@ public class WeaponScript : MonoBehaviour
 
     private void Update()
     {
-        if (ttimeReload > 0) ttimeReload -= Time.deltaTime;
+        if (_ttimeReload > 0) _ttimeReload -= Time.deltaTime;
     }
 }

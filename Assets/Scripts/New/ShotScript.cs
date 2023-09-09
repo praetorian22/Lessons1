@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class ShotScript : MonoBehaviour
 {
-    [SerializeField] private float lifeTime;    
-    [SerializeField] private int damage;
-    [SerializeField] private bool isEnemyShot;
+    [SerializeField] private float _lifeTime;    
+    [SerializeField] private int _damage;
+    [SerializeField] private bool _isEnemyShot;
 
-    public bool IsEnemyShot { get => isEnemyShot; }
-    public int Damage { get => damage; }
+    public bool IsEnemyShot { get => _isEnemyShot; }
+    public int Damage { get => _damage; }
 
     void Start()
     {        
         // ”ничтожение по окончанию таймера
-        Destroy(gameObject, lifeTime);
+        Destroy(gameObject, _lifeTime);
     }
    
 }

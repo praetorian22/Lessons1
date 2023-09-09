@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class MoveShot : MonoBehaviour
 {    
-    [SerializeField] private float speed;
-    private Rigidbody2D RBShot;
+    [SerializeField] private float _speed;
+    private Rigidbody2D _RBShot;
 
     void Start()
     {
-        RBShot = GetComponent<Rigidbody2D>();
+        _RBShot = GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate()
     {
-        RBShot.velocity = transform.up * speed;
+        _RBShot.velocity = transform.up * _speed;
     }
 }

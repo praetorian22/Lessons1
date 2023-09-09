@@ -126,9 +126,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5510f5ec26c4ac74aaba535b62494acd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 3
-  damage: 1
-  isEnemyShot: 0
+  _lifeTime: 2
+  _damage: 1
+  _isEnemyShot: 0
 --- !u!50 &-1800817562043775227
 Rigidbody2D:
   serializedVersion: 4
@@ -162,4 +162,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bd43f0b153250442b1307efcf1fca63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  _speed: 5

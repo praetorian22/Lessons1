@@ -150,6 +150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6fb0c28ffe56a840bc99d57a18638b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 2
-  isEnemy: 1
-  points: 10
+  _health: 2
+  _isEnemy: 1
+  _points: 10

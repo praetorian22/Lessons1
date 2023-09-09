@@ -5,31 +5,31 @@ using System;
 
 public class HealthScript : MonoBehaviour
 {
-    [SerializeField] private int health;
-    [SerializeField] private bool isEnemy;
-    [SerializeField] private int points;
+    [SerializeField] private int _health;
+    [SerializeField] private bool _isEnemy;
+    [SerializeField] private int _points;
 
-    public int Health { get => health; }
-    public bool IsEnemy { get => isEnemy; }
-    public int Points { get => points; }
+    public int Health { get => _health; }
+    public bool IsEnemy { get => _isEnemy; }
+    public int Points { get => _points; }
 
     public Action<int> changeHealthEvent;
     public Action<GameObject> deadEvent;
 
     private void Start()
     {
-        changeHealthEvent?.Invoke(health);
+        changeHealthEvent?.Invoke(_health);
     }
 
     public void Damage(int value)
     {
-        health -= value;        
-        if (health <= 0)
+        _health -= value;        
+        if (_health <= 0)
         {
-            health = 0;            
+            _health = 0;            
             deadEvent?.Invoke(gameObject);
         }
-        changeHealthEvent?.Invoke(health);
+        changeHealthEvent?.Invoke(_health);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -38,7 +38,7 @@ public class HealthScript : MonoBehaviour
         ShotScript shotscript = collision.gameObject.GetComponent<ShotScript>();
         HealthScript healthScript = collision.gameObject.GetComponent<HealthScript>();
         //Если это снаряд, то наносим повреждение кораблю и уничтожаем снаряд
-        if (shotscript != null && shotscript.IsEnemyShot != isEnemy)
+        if (shotscript != null && shotscript.IsEnemyShot != _isEnemy)
         {
             Damage(shotscript.Damage);
             Destroy(collision.gameObject);

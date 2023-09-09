@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private Text health;
-    [SerializeField] private Text score;
+    [SerializeField] private Text _health;
+    [SerializeField] private Text _score;
 
-    [SerializeField] private Text gameOver;
+    [SerializeField] private Text _gameOver;
 
     private void Start()
     {
@@ -17,21 +17,21 @@ public class UIManager : MonoBehaviour
 
     public void EndGame()
     {
-        gameOver.gameObject.SetActive(true);
+        _gameOver.gameObject.SetActive(true);
     }
 
     public void StartGame()
     {
-        gameOver.gameObject.SetActive(false);
+        _gameOver.gameObject.SetActive(false);
     }
 
     public void ChangeHealth(int value)
     {
-        health.text = value.ToString();
+        _health.text = value.ToString();
     }
 
     public void ChangeScore(int value)
     {
-        score.text = value.ToString();
+        _score.text = value.ToString();
     }
 }

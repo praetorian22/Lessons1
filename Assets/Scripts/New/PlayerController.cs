@@ -9,40 +9,40 @@ public class PlayerController : MonoBehaviour
     //[SerializeField] private KeyCode down;
     //[SerializeField] private KeyCode right;
     //[SerializeField] private KeyCode left;
-    [SerializeField] private float speed;
+    [SerializeField] private float _speed;
 
-    private Vector2 movement;
-    private Vector3 inputValueMovement;
-    private Rigidbody2D RBplayer;
-    private Controls inputControls;
+    private Vector2 _movement;
+    private Vector3 _inputValueMovement;
+    private Rigidbody2D _RBplayer;
+    private Controls _inputControls;
 
-    private WeaponScript weaponScript;
-    private Vector2 borderLD;
-    private Vector2 borderRU;
+    private WeaponScript _weaponScript;
+    private Vector2 _borderLD;
+    private Vector2 _borderRU;
 
     private void Awake()
     {
-        RBplayer = GetComponent<Rigidbody2D>();
-        inputControls = new Controls();
-        weaponScript = GetComponent<WeaponScript>();
+        _RBplayer = GetComponent<Rigidbody2D>();
+        _inputControls = new Controls();
+        _weaponScript = GetComponent<WeaponScript>();
     }
 
     private void OnEnable()
     {
-        inputControls.Enable();
-        inputControls.KeyBoard.Shot.performed += Shot;
+        _inputControls.Enable();
+        _inputControls.KeyBoard.Shot.performed += Shot;
     }
 
     private void Start()
     {
-        borderLD = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, Camera.main.nearClipPlane));
-        borderRU = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, Camera.main.nearClipPlane));
+        _borderLD = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, Camera.main.nearClipPlane));
+        _borderRU = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, Camera.main.nearClipPlane));
     }
 
     private void OnDisable()
     {
-        inputControls.Disable();
-        inputControls.KeyBoard.Shot.performed -= Shot;
+        _inputControls.Disable();
+        _inputControls.KeyBoard.Shot.performed -= Shot;
     }
 
     void Rotation()
@@ -61,8 +61,8 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        inputValueMovement = inputControls.KeyBoard.Move.ReadValue<Vector2>();
-        movement = Vector3.Lerp(movement, inputValueMovement, 0.01f);
+        _inputValueMovement = _inputControls.KeyBoard.Move.ReadValue<Vector2>();
+        _movement = Vector3.Lerp(_movement, _inputValueMovement, 0.01f);
         /*
         if (Input.GetKey(up))
         {
@@ -114,7 +114,7 @@ public class PlayerController : MonoBehaviour
 
     private void Shot(InputAction.CallbackContext callbackContext)
     {
-        GameObject shot = weaponScript.Shot();
+        GameObject shot = _weaponScript.Shot();
         if (shot != null) shot.transform.rotation = transform.rotation;
     }
 
@@ -127,11 +127,11 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        RBplayer.velocity = movement * speed;
-        if (transform.position.x > borderRU.x) transform.position = new Vector3(borderRU.x, transform.position.y, transform.position.z);
-        if (transform.position.x < borderLD.x) transform.position = new Vector3(borderLD.x, transform.position.y, transform.position.z);
-        if (transform.position.y > borderRU.y) transform.position = new Vector3(transform.position.x, borderRU.y, transform.position.z);
-        if (transform.position.y < borderLD.y) transform.position = new Vector3(transform.position.x, borderLD.y, transform.position.z);
+        _RBplayer.velocity = _movement * _speed;
+        if (transform.position.x > _borderRU.x) transform.position = new Vector3(_borderRU.x, transform.position.y, transform.position.z);
+        if (transform.position.x < _borderLD.x) transform.position = new Vector3(_borderLD.x, transform.position.y, transform.position.z);
+        if (transform.position.y > _borderRU.y) transform.position = new Vector3(transform.position.x, _borderRU.y, transform.position.z);
+        if (transform.position.y < _borderLD.y) transform.position = new Vector3(transform.position.x, _borderLD.y, transform.position.z);
         //rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * speed, Input.GetAxisRaw("Vertical") * speed);
     }
 }
