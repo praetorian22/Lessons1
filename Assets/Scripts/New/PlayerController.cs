@@ -127,7 +127,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _RBplayer.velocity = _movement * _speed;
+        if (_RBplayer != null) _RBplayer.velocity = _movement * _speed;
         if (transform.position.x > _borderRU.x) transform.position = new Vector3(_borderRU.x, transform.position.y, transform.position.z);
         if (transform.position.x < _borderLD.x) transform.position = new Vector3(_borderLD.x, transform.position.y, transform.position.z);
         if (transform.position.y > _borderRU.y) transform.position = new Vector3(transform.position.x, _borderRU.y, transform.position.z);

@@ -17,21 +17,21 @@ public class UIManager : MonoBehaviour
 
     public void EndGame()
     {
-        _gameOver.gameObject.SetActive(true);
+        if (_gameOver != null) _gameOver.gameObject.SetActive(true);
     }
 
     public void StartGame()
     {
-        _gameOver.gameObject.SetActive(false);
+        if (_gameOver != null) _gameOver.gameObject.SetActive(false);
     }
 
     public void ChangeHealth(int value)
     {
-        _health.text = value.ToString();
+        if (_health != null) _health.text = value.ToString();
     }
 
     public void ChangeScore(int value)
     {
-        _score.text = value.ToString();
+        if (_health != null) _score.text = value.ToString();
     }
 }

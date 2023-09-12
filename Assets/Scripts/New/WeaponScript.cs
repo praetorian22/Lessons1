@@ -19,9 +19,12 @@ public class WeaponScript : MonoBehaviour
     {
         if (_ttimeReload <= 0)
         {
-            GameObject shot = Instantiate(_shotPrefab, _pointShotPosition.position, Quaternion.identity, gameObject.transform.parent);
-            _ttimeReload = _timeReload;
-            return shot;            
+            if (_shotPrefab != null)
+            {
+                GameObject shot = Instantiate(_shotPrefab, _pointShotPosition.position, Quaternion.identity, gameObject.transform.parent);
+                _ttimeReload = _timeReload;
+                return shot;
+            }            
         }
         return null;
     }

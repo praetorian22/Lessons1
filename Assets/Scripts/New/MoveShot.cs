@@ -14,6 +14,6 @@ public class MoveShot : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _RBShot.velocity = transform.up * _speed;
+        if (_RBShot != null) _RBShot.velocity = transform.up * _speed;
     }
 }

@@ -21,12 +21,17 @@ public class GameManager : MonoBehaviour
 
 	void Start()
 	{
-		_player.GetComponent<HealthScript>().changeHealthEvent += _uiManager.ChangeHealth;
-		_player.GetComponent<HealthScript>().deadEvent += GameOver;
-		_scoreManager.Init();
-		_scoreManager.changeScoreEvent += _uiManager.ChangeScore;
-
-		StartCoroutine(SpawnEnemies());
+		if (_player != null)
+        {
+			_player.GetComponent<HealthScript>().changeHealthEvent += _uiManager.ChangeHealth;
+			_player.GetComponent<HealthScript>().deadEvent += GameOver;
+		}
+		if (_scoreManager != null)
+        {
+			_scoreManager.Init();
+			_scoreManager.changeScoreEvent += _uiManager.ChangeScore;
+        }
+        StartCoroutine(SpawnEnemies());
 	}
 
 	public void GameOver(GameObject player)
@@ -59,10 +64,13 @@ public class GameManager : MonoBehaviour
 					float posX = this.transform.position.x + (Mathf.Cos((randDirection) * Mathf.Deg2Rad) * randDistance);
 					float posY = this.transform.position.y + (Mathf.Sin((randDirection) * Mathf.Deg2Rad) * randDistance);
 					// Создаём врага на заданных координатах
-					GameObject enemyGO = Instantiate(_enemy, new Vector3(posX, posY, 0), this.transform.rotation);
-					_allEnemy.Add(enemyGO);
-					enemyGO.GetComponent<HealthScript>().deadEvent += KilledEnemy;
-					_currentNumberOfEnemies++;
+					if (_enemy != null)
+                    {
+						GameObject enemyGO = Instantiate(_enemy, new Vector3(posX, posY, 0), this.transform.rotation);
+						_allEnemy.Add(enemyGO);
+						enemyGO.GetComponent<HealthScript>().deadEvent += KilledEnemy;
+						_currentNumberOfEnemies++;
+					}					
 					yield return new WaitForSeconds(_timeBetweenEnemies);
 				}
 			}
@@ -76,7 +84,7 @@ public class GameManager : MonoBehaviour
 	{
 		_currentNumberOfEnemies--;
 		_allEnemy.Remove(enemy);
-		_scoreManager.AddScore(enemy.GetComponent<HealthScript>().Points);
+		if (_scoreManager != null) _scoreManager.AddScore(enemy.GetComponent<HealthScript>().Points);
 		enemy.GetComponent<HealthScript>().deadEvent -= KilledEnemy;
 		Destroy(enemy);
 	}
